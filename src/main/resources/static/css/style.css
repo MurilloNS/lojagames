@@ -95,10 +95,17 @@ body {
 	white-space: nowrap;
 }
 
+/* Corpo das páginas */
+
 .corpo {
 	margin-left: 20%;
 	color: black;
 	width: 70%;
+}
+
+.link-cadastro {
+	color: white;
+	text-decoration: none;
 }
 
 

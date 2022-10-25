@@ -17,13 +17,18 @@ public class ClienteController {
 	@GetMapping("/cliente/cadastrar")
 	public ModelAndView cadastrar(Cliente cliente) {
 		ModelAndView mv = new ModelAndView("/administrativo/cliente_cadastro");
-		mv.addObject("cliente", cliente);
-		return mv;
+		return mv.addObject("cliente", cliente);
 	}
 	
 	@PostMapping("/cliente/salvar")
 	public ModelAndView salvar(Cliente cliente) {
 		clienteService.salvarCliente(cliente);
 		return cadastrar(new Cliente());
+	}
+	
+	@GetMapping("/cliente/listar")
+	public ModelAndView listar() {
+		ModelAndView mv = new ModelAndView("/administrativo/cliente_lista");
+		return mv.addObject("listaClientes", clienteService.findAllClientes());
 	}
 }
