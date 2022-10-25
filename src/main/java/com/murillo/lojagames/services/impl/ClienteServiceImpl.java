@@ -20,8 +20,8 @@ public class ClienteServiceImpl implements ClienteService{
 	}
 
 	@Override
-	public Cliente cadastrarCliente(Cliente cliente) {
-		return clienteRepository.save(cliente);
+	public Cliente salvarCliente(Cliente cliente) {
+		return clienteRepository.saveAndFlush(cliente);
 	}
 
 }

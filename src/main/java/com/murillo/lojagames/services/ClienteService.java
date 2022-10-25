@@ -7,5 +7,5 @@ import com.murillo.lojagames.entities.Cliente;
 public interface ClienteService {
 	List<Cliente> findAllClientes();
 	
-	Cliente cadastrarCliente(Cliente cliente);
+	Cliente salvarCliente(Cliente cliente);
 }
