@@ -1,15 +1,11 @@
 package com.murillo.lojagames.controllers;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,6 +23,12 @@ public class ProdutoController {
 	public ModelAndView cadastrar(Produto produto) {
 		ModelAndView mv = new ModelAndView("/administrativo/produto_cadastro");
 		return mv.addObject("produto", produto);
+	}
+	
+	@GetMapping("/produto/listar")
+	public ModelAndView listar() {
+		ModelAndView mv = new ModelAndView("/administrativo/produto_lista");
+		return mv.addObject("listaProdutos", produtoService.listarProdutos());
 	}
 
 	@PostMapping("/produto/salvar")

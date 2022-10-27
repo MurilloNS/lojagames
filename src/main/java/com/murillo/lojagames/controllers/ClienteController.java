@@ -29,6 +29,6 @@ public class ClienteController {
 	@GetMapping("/cliente/listar")
 	public ModelAndView listar() {
 		ModelAndView mv = new ModelAndView("/administrativo/cliente_lista");
-		return mv.addObject("listaClientes", clienteService.findAllClientes());
+		return mv.addObject("listaClientes", clienteService.listarClientes());
 	}
 }
