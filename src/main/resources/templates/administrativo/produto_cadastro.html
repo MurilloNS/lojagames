@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{administrativo/layout}">
+
+<head>
+	<title>Produtos - Dashboard</title>
+</head>
+
+<body>
+	<section class="corpo" layout:fragment="corpo">
+		<h1>Produtos</h1>
+		<form action="/produto/salvar" th:object="${produto}" method="POST">
+			<div class="form-group">
+				<label for="game">Game: </label>
+				<input type="text" class="form-control" id="game" th:field="*{nome}">
+			</div>
+			<div class="form-group">
+				<label for="genero">Gênero</label>
+				<select th:field="*{generoGames}" class="form-control">
+					<option value="">Selecione...</option>
+					<option th:each="gen : ${T(com.murillo.lojagames.enums.GeneroGames).values()}" th:value="${gen}" th:text="${gen.genero}"></option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="preco">Valor: </label>
+				<input type="text" class="form-control" id="preco" th:field="*{preco}" autocomplete="off">
+			</div>
+			<div class="form-group">
+				<label for="quantidade">Quantidade: </label>
+				<input type="number" class="form-control" id="quantidade" th:field="*{quantidade}" min="0"
+					autocomplete="off">
+			</div>
+			<div class="form-group">
+				<label for="imagem">Imagem: </label>
+				<input type="text" class="form-control" id="imagem" th:field="*{imagem}">
+			</div>
+			<button type="submit" class="btn btn-primary">Cadastrar</button>
+		</form>
+	</section>
+
+</body>
+
+</html>

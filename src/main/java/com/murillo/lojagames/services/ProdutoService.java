@@ -1,5 +1,7 @@
 package com.murillo.lojagames.services;
 
-public interface ProdutoService {
+import com.murillo.lojagames.entities.Produto;
 
+public interface ProdutoService {
+	Produto salvar(Produto produto);
 }
