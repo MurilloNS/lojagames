@@ -19,17 +19,23 @@
 					<th scope="col">Gênero</th>
 					<th scope="col">Preço</th>
 					<th scope="col">Quantidade</th>
-					<th scope="col">Imagem</th>
+					<th scope="col">Capa</th>
 					<th scope="col"></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="produto : ${listaProdutos}">
 					<td th:text="${produto.nome}"></td>
-					<!--<td th:text="${produto.genero}"></td>-->
+					<td th:text="${produto.generoGames}"></td>
 					<td th:text="${produto.preco}"></td>
 					<td th:text="${produto.quantidade}"></td>
-					<td th:text="${produto.imagem}"></td>
+					<td><img th:src="@{/produto/mostrarImagem/{imagem}(imagem=${produto.imagem})}" width="100" /></td>
+					<td>
+						<a th:href="@{/produto/editar/{id}(id=${produto.id})}"><button type="button"
+								class="btn btn-warning"><i class="fa-solid fa-pencil"></i></button></a>
+						<a th:href="@{/produto/excluir/{id}(id=${produto.id})}"><button type="button"
+								class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button></a>
+					</td>
 				</tr>
 			</tbody>
 		</table>

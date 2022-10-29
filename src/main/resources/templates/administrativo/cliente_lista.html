@@ -26,6 +26,12 @@
 					<td th:text="${cliente.nome}"></td>
 					<td th:text="${cliente.cpf}"></td>
 					<td th:text="${cliente.email}"></td>
+					<td>
+						<a th:href="@{/cliente/editar/{id}(id=${cliente.id})}"><button type="button"
+								class="btn btn-warning"><i class="fa-solid fa-pencil"></i></button></a>
+						<a th:href="@{/cliente/excluir/{id}(id=${cliente.id})}"><button type="button"
+								class="btn btn-danger"><i class="fa-regular fa-trash-can"></i></button></a>
+					</td>
 				</tr>
 			</tbody>
 		</table>

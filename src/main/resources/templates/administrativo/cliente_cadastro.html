@@ -25,9 +25,10 @@
 				<label for="senha">Senha: </label>
 				<input type="password" class="form-control" id="senha" th:field="*{senha}">
 			</div>
-			<button type="submit" class="btn btn-primary">Cadastrar</button>
+			<input type="hidden" id="id" th:field="*{id}" />
+			<button type="submit" class="btn btn-primary">Salvar</button>
 		</form>
 	</section>
-</body>>
+</body>
 
 </html>

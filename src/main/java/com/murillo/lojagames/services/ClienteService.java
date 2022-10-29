@@ -8,4 +8,8 @@ public interface ClienteService {
 	List<Cliente> listarClientes();
 	
 	Cliente salvarCliente(Cliente cliente);
+	
+	Cliente encontrarCliente(Long id);
+	
+	void apagarCliente(Long id);
 }

@@ -1,6 +1,7 @@
 package com.murillo.lojagames.services.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,4 +25,14 @@ public class ClienteServiceImpl implements ClienteService{
 		return clienteRepository.saveAndFlush(cliente);
 	}
 
+	@Override
+	public Cliente encontrarCliente(Long id) {
+		Optional<Cliente> cliente = clienteRepository.findById(id);
+		return cliente.get();
+	}
+
+	@Override
+	public void apagarCliente(Long id) {
+		clienteRepository.deleteById(id);
+	}
 }

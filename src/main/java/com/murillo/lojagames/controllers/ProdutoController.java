@@ -1,11 +1,16 @@
 package com.murillo.lojagames.controllers;
 
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.Files;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,22 +38,30 @@ public class ProdutoController {
 
 	@PostMapping("/produto/salvar")
 	public ModelAndView salvar(Produto produto, @RequestParam("file") MultipartFile arquivo) {
-		produtoService.salvar(produto);
-
-		try {
-			if (!arquivo.isEmpty()) {
-				byte[] bytes = arquivo.getBytes();
-				Path caminho = Paths
-						.get(caminhoImagens + String.valueOf(produto.getId()) + arquivo.getOriginalFilename());
-				Files.write(caminho, bytes);
-
-				produto.setImagem(String.valueOf(produto.getId()) + arquivo.getOriginalFilename());
-				produtoService.salvar(produto);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		produtoService.salvarProduto(produto, arquivo);
 		return cadastrar(new Produto());
+	}
+	
+	@SuppressWarnings("null")
+	@GetMapping("/produto/mostrarImagem/{imagem}")
+	@ResponseBody
+	public byte[] retornarImagem(@PathVariable("imagem") String imagem) throws IOException {
+		File imagemArquivo = new File(caminhoImagens + imagem);
+		if(imagem != null || imagem.trim().length() > 0) {
+			return Files.readAllBytes(imagemArquivo.toPath());
+		}
+		return null;
+	}
+	
+	@GetMapping("/produto/editar/{id}")
+	public ModelAndView editar(@PathVariable("id") Long id) {
+		Produto produto = produtoService.encontrarProduto(id);
+		return cadastrar(produto);
+	}
+	
+	@GetMapping("produto/excluir/{id}")
+	public ModelAndView excluir(@PathVariable("id") Long id) {
+		produtoService.apagarProduto(id);
+		return listar();
 	}
 }
