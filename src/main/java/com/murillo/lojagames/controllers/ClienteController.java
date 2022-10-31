@@ -9,16 +9,22 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.murillo.lojagames.entities.Cliente;
 import com.murillo.lojagames.services.ClienteService;
+import com.murillo.lojagames.services.ProdutoService;
 
 @Controller
 public class ClienteController {
 	@Autowired
 	private ClienteService clienteService;
+	
+	@Autowired
+	private ProdutoService produtoService;
 
 	@GetMapping("/cliente/cadastrar")
 	public ModelAndView cadastrar(Cliente cliente) {
 		ModelAndView mv = new ModelAndView("/administrativo/cliente_cadastro");
-		return mv.addObject("cliente", cliente);
+		mv.addObject("listarProdutos", produtoService.listarProdutos());
+		mv.addObject("cliente", cliente);
+		return mv;
 	}
 
 	@PostMapping("/cliente/salvar")

@@ -1,5 +1,8 @@
 package com.murillo.lojagames.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 import com.murillo.lojagames.enums.GeneroGames;
@@ -18,11 +21,14 @@ public class Produto {
 	@Enumerated(EnumType.STRING)
 	private GeneroGames generoGames;
 
+	@ManyToMany(mappedBy = "produtos")
+	private List<Cliente> clientes = new ArrayList<>();
+
 	public Produto() {
 
 	}
 
-	public Produto(Long id, String nome, Double preco, Integer quantidade, String imagem, GeneroGames generoGames) {
+	public Produto(Long id, String nome, Double preco, Integer quantidade, String imagem, GeneroGames generoGames, List<Cliente> clientes) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -30,6 +36,7 @@ public class Produto {
 		this.quantidade = quantidade;
 		this.imagem = imagem;
 		this.generoGames = generoGames;
+		this.clientes = clientes;
 	}
 
 	public String getNome() {
@@ -75,8 +82,16 @@ public class Produto {
 	public Long getId() {
 		return id;
 	}
-	
+
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public List<Cliente> getClientes() {
+		return clientes;
+	}
+
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
 	}
 }

@@ -1,5 +1,8 @@
 package com.murillo.lojagames.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,17 +16,24 @@ public class Cliente {
 	private String email;
 	private String senha;
 
-	public Cliente() {
+	@ManyToMany
+	@JoinTable(
+			name = "item_produto", 
+			joinColumns = @JoinColumn(name = "cliente_id", referencedColumnName = "id"), 
+			inverseJoinColumns = @JoinColumn(name = "produto_id", referencedColumnName = "id"))
+	private List<Produto> produtos = new ArrayList<>();
 
+	public Cliente() {
 	}
 
-	public Cliente(Long id, String nome, String cpf, String email, String senha) {
+	public Cliente(Long id, String nome, String cpf, String email, String senha, List<Produto> produtos) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
 		this.senha = senha;
+		this.produtos = produtos;
 	}
 
 	public Long getId() {
@@ -64,5 +74,13 @@ public class Cliente {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
 	}
 }
