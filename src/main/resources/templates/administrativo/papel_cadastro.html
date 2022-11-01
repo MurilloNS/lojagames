@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{administrativo/layout}">
+
+<head>
+	<title>Papéis - Dashboard</title>
+</head>
+
+<body>
+	<section class="corpo" layout:fragment="corpo">
+		<h1>Papéis</h1>
+		<form action="/papel/salvar" th:object="${papel}" method="POST">
+			<div class="form-group">
+				<label for="name">Papel: </label>
+				<input type="text" class="form-control" id="name" th:field="*{nome}">
+			</div>
+			<input type="hidden" id="id" th:field="*{id}" />
+			<button type="submit" class="btn btn-primary">Salvar</button>
+		</form>
+	</section>
+</body>
+
+</html>
