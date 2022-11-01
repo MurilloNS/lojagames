@@ -19,10 +19,16 @@ public class PapelController {
 		ModelAndView mv = new ModelAndView("administrativo/papel_cadastro");
 		return mv.addObject("papel", papel);
 	}
-	
+
 	@PostMapping("/papel/salvar")
 	public ModelAndView salvar(Papel papel) {
 		papelService.salvarPapel(papel);
 		return cadastrar(new Papel());
+	}
+
+	@GetMapping("/papel/listar")
+	public ModelAndView listar() {
+		ModelAndView mv = new ModelAndView("/administrativo/papel_lista");
+		return mv.addObject("listaPapeis", papelService.listarPapeis());
 	}
 }
