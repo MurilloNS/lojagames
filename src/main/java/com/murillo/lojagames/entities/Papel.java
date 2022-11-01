@@ -1,14 +1,23 @@
 package com.murillo.lojagames.entities;
 
+import java.io.Serializable;
+import java.util.Objects;
+import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "tb_papeis")
-public class Papel {
+public class Papel implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
+
+	@OneToMany(mappedBy = "id.papel")
+	private Set<AdministradorPapel> administradorPapel;
 
 	public Papel() {
 	}
@@ -32,5 +41,22 @@ public class Papel {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Papel other = (Papel) obj;
+		return Objects.equals(id, other.id);
 	}
 }

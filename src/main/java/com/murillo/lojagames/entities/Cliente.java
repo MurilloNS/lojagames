@@ -1,5 +1,6 @@
 package com.murillo.lojagames.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "tb_clientes")
-public class Cliente {
+public class Cliente implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -17,10 +20,7 @@ public class Cliente {
 	private String senha;
 
 	@ManyToMany
-	@JoinTable(
-			name = "item_produto", 
-			joinColumns = @JoinColumn(name = "cliente_id", referencedColumnName = "id"), 
-			inverseJoinColumns = @JoinColumn(name = "produto_id", referencedColumnName = "id"))
+	@JoinTable(name = "item_produto", joinColumns = @JoinColumn(name = "cliente_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "produto_id", referencedColumnName = "id"))
 	private List<Produto> produtos = new ArrayList<>();
 
 	public Cliente() {
@@ -74,7 +74,7 @@ public class Cliente {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
+
 	public List<Produto> getProdutos() {
 		return produtos;
 	}

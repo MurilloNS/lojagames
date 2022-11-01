@@ -14,7 +14,7 @@ public class PapelController {
 	@Autowired
 	private PapelService papelService;
 
-	@GetMapping("/papel/cadastro")
+	@GetMapping("/papel/cadastrar")
 	public ModelAndView cadastrar(Papel papel) {
 		ModelAndView mv = new ModelAndView("administrativo/papel_cadastro");
 		return mv.addObject("papel", papel);

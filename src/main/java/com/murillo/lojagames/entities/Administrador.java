@@ -1,10 +1,16 @@
 package com.murillo.lojagames.entities;
 
+import java.io.Serializable;
+import java.util.Objects;
+import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "tb_administradores")
-public class Administrador {
+public class Administrador implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -12,6 +18,9 @@ public class Administrador {
 	private String cpf;
 	private String email;
 	private String senha;
+
+	@OneToMany(mappedBy = "id.administrador")
+	private Set<AdministradorPapel> administradorPapel;
 
 	public Administrador() {
 	}
@@ -62,5 +71,30 @@ public class Administrador {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public Set<AdministradorPapel> getAdministradorPapel() {
+		return administradorPapel;
+	}
+
+	public void setAdministradorPapel(Set<AdministradorPapel> administradorPapel) {
+		this.administradorPapel = administradorPapel;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Administrador other = (Administrador) obj;
+		return Objects.equals(id, other.id);
 	}
 }
