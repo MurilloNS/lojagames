@@ -25,11 +25,10 @@ public class Produto {
 	private List<Cliente> clientes = new ArrayList<>();
 
 	public Produto() {
-
 	}
 
-	public Produto(Long id, String nome, Double preco, Integer quantidade, String imagem, GeneroGames generoGames, List<Cliente> clientes) {
-		super();
+	public Produto(Long id, String nome, Double preco, Integer quantidade, String imagem, GeneroGames generoGames,
+			List<Cliente> clientes) {
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;

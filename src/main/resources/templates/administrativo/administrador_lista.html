@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{administrativo/layout}">
+
+<head>
+	<title>Administrador - Dashboard</title>
+</head>
+
+<body>
+	<section class="corpo" layout:fragment="corpo">
+		<h1>Administradores</h1>
+		<!--<a class="link-cadastro" href="/cliente/cadastrar"><button type="button" class="btn btn-secondary">Cadastrar
+				Novo Cliente</button>
+		</a>-->
+
+		<table class="table my-3">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col">Nome</th>
+					<th scope="col">CPF</th>
+					<th scope="col">E-mail</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="adms : ${listaAdministradores}">
+					<td th:text="${adms.nome}"></td>
+					<td th:text="${adms.cpf}"></td>
+					<td th:text="${adms.email}"></td>
+					<td>
+						<a th:href="@{/cliente/editar/{id}(id=${cliente.id})}"><button type="button"
+								class="btn btn-warning"><i class="fa-solid fa-pencil"></i></button></a>
+						<a th:href="@{/cliente/excluir/{id}(id=${cliente.id})}"><button type="button"
+								class="btn btn-danger"><i class="fa-regular fa-trash-can"></i></button></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+</body>
+
+</html>
