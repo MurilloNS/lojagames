@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{administrativo/layout}">
+
+<head>
+	<title>Administradores - Dashboard</title>
+</head>
+
+<body>
+	<section class="corpo" layout:fragment="corpo">
+		<h1>Administradores</h1>
+		<form action="/administrador/salvar" th:object="${administrador}" method="POST">
+			<div class="form-group">
+				<label for="name">Nome Completo: </label>
+				<input type="text" class="form-control" id="name" th:field="*{nome}">
+			</div>
+			<div class="form-group">
+				<label for="cpf">CPF: </label>
+				<input type="text" class="form-control" id="cpf" th:field="*{cpf}">
+			</div>
+			<div class="form-group">
+				<label for="email">E-mail: </label>
+				<input type="email" class="form-control" id="email" th:field="*{email}">
+			</div>
+			<div class="form-group">
+				<label for="papeis">Papéis: </label>
+				<select th:field="*{papeis}" class="form-control">
+					<option value="">Selecione...</option>
+					<option th:each="papeis: ${listaPapeis}" th:value="${papeis.id}" th:text="${papeis.nome}"></option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="senha">Senha: </label>
+				<input type="password" class="form-control" id="senha" th:field="*{senha}">
+			</div>
+			<input type="hidden" id="id" th:field="*{id}" />
+			<button type="submit" class="btn btn-primary">Salvar</button>
+		</form>
+	</section>
+</body>
+
+</html>

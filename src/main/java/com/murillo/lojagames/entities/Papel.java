@@ -2,7 +2,6 @@ package com.murillo.lojagames.entities;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.util.Set;
 
 import javax.persistence.*;
 
@@ -14,12 +13,15 @@ public class Papel implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Column(length = 25, nullable = false, unique = true)
 	private String nome;
 
-	@OneToMany(mappedBy = "id.papel")
-	private Set<AdministradorPapel> administradorPapel;
-
 	public Papel() {
+	}
+
+	public Papel(Long id) {
+		this.id = id;
 	}
 
 	public Papel(Long id, String nome) {
@@ -58,5 +60,10 @@ public class Papel implements Serializable {
 			return false;
 		Papel other = (Papel) obj;
 		return Objects.equals(id, other.id);
+	}
+
+	@Override
+	public String toString() {
+		return this.nome;
 	}
 }

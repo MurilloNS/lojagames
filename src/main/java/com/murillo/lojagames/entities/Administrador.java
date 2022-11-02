@@ -1,7 +1,7 @@
 package com.murillo.lojagames.entities;
 
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -14,19 +14,28 @@ public class Administrador implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Column(nullable = false)
 	private String nome;
+
+	@Column(length = 11, nullable = false, unique = true)
 	private String cpf;
+
+	@Column(length = 45, nullable = false, unique = false)
 	private String email;
+
+	@Column(nullable = false)
 	private String senha;
 
-	@OneToMany(mappedBy = "id.administrador")
-	private Set<AdministradorPapel> administradorPapel;
+	@ManyToMany
+	@JoinTable(name = "administrador_papel", joinColumns = @JoinColumn(name = "administrador_id"), inverseJoinColumns = @JoinColumn(name = "papel_id"))
+	private Set<Papel> papeis = new HashSet<>();
 
 	public Administrador() {
 	}
 
-	public Administrador(Long id, String nome, String cpf, String email, String senha) {
-		this.id = id;
+	public Administrador(String nome, String cpf, String email, String senha) {
+		super();
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
@@ -73,28 +82,19 @@ public class Administrador implements Serializable {
 		this.senha = senha;
 	}
 
-	public Set<AdministradorPapel> getAdministradorPapel() {
-		return administradorPapel;
+	public Set<Papel> getPapeis() {
+		return papeis;
 	}
 
-	public void setAdministradorPapel(Set<AdministradorPapel> administradorPapel) {
-		this.administradorPapel = administradorPapel;
+	public void setPapeis(Set<Papel> papeis) {
+		this.papeis = papeis;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
+	public void addPapel(Papel papel) {
+		this.papeis.add(papel);
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Administrador other = (Administrador) obj;
-		return Objects.equals(id, other.id);
+	public void removePapel(Papel papel) {
+		this.papeis.remove(papel);
 	}
 }
