@@ -11,7 +11,7 @@
 		<form action="/papel/salvar" th:object="${papel}" method="POST">
 			<div class="form-group">
 				<label for="name">Papel: </label>
-				<input type="text" class="form-control" id="name" th:field="*{nome}">
+				<input type="text" class="form-control" id="name" th:field="*{nome}" oninput="this.value = this.value.toUpperCase()">
 			</div>
 			<input type="hidden" id="id" th:field="*{id}" />
 			<button type="submit" class="btn btn-primary">Salvar</button>

@@ -34,6 +34,11 @@ public class Cliente implements Serializable {
 	public Cliente() {
 	}
 
+	public Cliente(Long id) {
+		super();
+		this.id = id;
+	}
+
 	public Cliente(String nome, String cpf, String email, String senha, List<Produto> produtos) {
 		this.nome = nome;
 		this.cpf = cpf;

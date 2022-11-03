@@ -23,4 +23,14 @@ public class PapelServiceImpl implements PapelService {
 	public Papel salvarPapel(Papel papel) {
 		return papelRepository.saveAndFlush(papel);
 	}
+
+	@Override
+	public Papel encontrarPapel(Long id) {
+		return papelRepository.findById(id).get();
+	}
+
+	@Override
+	public void apagarPapel(Long id) {
+		papelRepository.deleteById(id);
+	}
 }

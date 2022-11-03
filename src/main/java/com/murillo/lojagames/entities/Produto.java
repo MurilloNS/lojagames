@@ -35,6 +35,10 @@ public class Produto implements Serializable {
 	public Produto() {
 	}
 
+	public Produto(Long id) {
+		this.id = id;
+	}
+
 	public Produto(String nome, Double preco, Integer quantidade, String imagem, GeneroGames generoGames,
 			List<Cliente> clientes) {
 		this.nome = nome;

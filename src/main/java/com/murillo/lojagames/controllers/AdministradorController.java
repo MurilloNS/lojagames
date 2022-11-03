@@ -47,7 +47,7 @@ public class AdministradorController {
 		return cadastrar(administrador, null);
 	}
 
-	@GetMapping("/administrativo/excluir/{id}")
+	@GetMapping("/administrador/excluir/{id}")
 	public ModelAndView apagar(@PathVariable("id") Long id) {
 		administradorService.apagarAdministrador(id);
 		return listar();
