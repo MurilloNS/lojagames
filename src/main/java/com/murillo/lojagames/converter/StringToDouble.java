@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class StringToDouble implements Converter<String, Double> {
-
 	@Override
 	public Double convert(String source) {
 		source = source.trim();
@@ -14,5 +13,4 @@ public class StringToDouble implements Converter<String, Double> {
 		}
 		return 0.;
 	}
-
 }

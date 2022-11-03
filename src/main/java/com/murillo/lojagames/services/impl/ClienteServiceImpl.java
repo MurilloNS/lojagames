@@ -22,6 +22,7 @@ public class ClienteServiceImpl implements ClienteService{
 
 	@Override
 	public Cliente salvarCliente(Cliente cliente) {
+		cliente.setCpf(cliente.getCpf().replace(".", "").replace("-", ""));
 		return clienteRepository.saveAndFlush(cliente);
 	}
 

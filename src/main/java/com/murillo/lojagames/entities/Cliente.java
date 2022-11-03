@@ -14,9 +14,17 @@ public class Cliente implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Column(nullable = true)
 	private String nome;
+
+	@Column(length = 11, nullable = true, unique = true)
 	private String cpf;
+
+	@Column(length = 45, nullable = true, unique = true)
 	private String email;
+
+	@Column(nullable = false)
 	private String senha;
 
 	@ManyToMany
@@ -26,8 +34,7 @@ public class Cliente implements Serializable {
 	public Cliente() {
 	}
 
-	public Cliente(Long id, String nome, String cpf, String email, String senha, List<Produto> produtos) {
-		this.id = id;
+	public Cliente(String nome, String cpf, String email, String senha, List<Produto> produtos) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;

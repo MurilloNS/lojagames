@@ -16,8 +16,13 @@ public class Produto implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Column(nullable = true)
 	private String nome;
+
+	@Column(nullable = true, columnDefinition = "decimal(10,2)")
 	private Double preco;
+
 	private Integer quantidade;
 	private String imagem;
 
@@ -30,9 +35,8 @@ public class Produto implements Serializable {
 	public Produto() {
 	}
 
-	public Produto(Long id, String nome, Double preco, Integer quantidade, String imagem, GeneroGames generoGames,
+	public Produto(String nome, Double preco, Integer quantidade, String imagem, GeneroGames generoGames,
 			List<Cliente> clientes) {
-		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
 		this.quantidade = quantidade;

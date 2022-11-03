@@ -35,7 +35,6 @@ public class Administrador implements Serializable {
 	}
 
 	public Administrador(String nome, String cpf, String email, String senha) {
-		super();
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
