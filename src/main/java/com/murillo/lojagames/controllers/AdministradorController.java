@@ -20,7 +20,7 @@ public class AdministradorController {
 	@Autowired
 	private PapelService papelService;
 
-	@GetMapping("/administrador/")
+	@GetMapping("/administrador/cadastrar")
 	public ModelAndView cadastrar(Administrador administrador, Papel papel) {
 		ModelAndView mv = new ModelAndView("administrativo/administrador_cadastro");
 		mv.addObject("administrador", administrador);

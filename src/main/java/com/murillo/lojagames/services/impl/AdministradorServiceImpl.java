@@ -3,6 +3,7 @@ package com.murillo.lojagames.services.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.murillo.lojagames.entities.Administrador;
@@ -22,6 +23,7 @@ public class AdministradorServiceImpl implements AdministradorService {
 	@Override
 	public Administrador salvarAdministrador(Administrador administrador) {
 		administrador.setCpf(administrador.getCpf().replace(".", "").replace("-", ""));
+		administrador.setSenha(new BCryptPasswordEncoder().encode(administrador.getSenha()));
 		return administradorRepository.saveAndFlush(administrador);
 	}
 

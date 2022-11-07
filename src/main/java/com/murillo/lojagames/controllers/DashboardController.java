@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class DashboardController {
-	@RequestMapping("/administrativo")
-	public String telaDashboard() {
+	@RequestMapping("/home")
+	public String home() {
 		return "/administrativo/home";
 	}
 }

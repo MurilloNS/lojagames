@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.murillo.lojagames.entities.Cliente;
@@ -11,7 +12,7 @@ import com.murillo.lojagames.repositories.ClienteRepository;
 import com.murillo.lojagames.services.ClienteService;
 
 @Service
-public class ClienteServiceImpl implements ClienteService{
+public class ClienteServiceImpl implements ClienteService {
 	@Autowired
 	private ClienteRepository clienteRepository;
 
@@ -23,6 +24,7 @@ public class ClienteServiceImpl implements ClienteService{
 	@Override
 	public Cliente salvarCliente(Cliente cliente) {
 		cliente.setCpf(cliente.getCpf().replace(".", "").replace("-", ""));
+		cliente.setSenha(new BCryptPasswordEncoder().encode(cliente.getSenha()));
 		return clienteRepository.saveAndFlush(cliente);
 	}
 
