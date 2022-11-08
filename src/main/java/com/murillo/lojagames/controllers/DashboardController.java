@@ -9,4 +9,14 @@ public class DashboardController {
 	public String home() {
 		return "/administrativo/home";
 	}
+	
+	@RequestMapping("/logout")
+	public String sair() {
+		return "/administrativo/home";
+	}
+	
+	@RequestMapping("/")
+	public String sairDois() {
+		return "/administrativo/home";
+	}
 }
