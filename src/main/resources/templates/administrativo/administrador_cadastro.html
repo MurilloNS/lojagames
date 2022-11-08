@@ -19,15 +19,15 @@
 		<form action="/administrador/salvar" th:object="${administrador}" method="POST">
 			<div class="form-group">
 				<label for="name">Nome Completo: </label>
-				<input type="text" class="form-control" id="name" th:field="*{nome}">
+				<input type="text" class="form-control" id="name" th:field="*{nome}" required>
 			</div>
 			<div class="form-group">
 				<label for="cpf">CPF: </label>
-				<input type="text" class="form-control" id="cpf" th:field="*{cpf}">
+				<input type="text" class="form-control" id="cpf" th:field="*{cpf}" required>
 			</div>
 			<div class="form-group">
 				<label for="email">E-mail: </label>
-				<input type="email" class="form-control" id="email" th:field="*{email}">
+				<input type="email" class="form-control" id="email" th:field="*{email}" required>
 			</div>
 			<div class="form-group">
 				<label for="papeis">Papéis: </label>
@@ -38,7 +38,7 @@
 			</div>
 			<div class="form-group">
 				<label for="senha">Senha: </label>
-				<input type="password" class="form-control" id="senha" th:field="*{senha}">
+				<input type="password" class="form-control" id="senha" th:field="*{senha}" required>
 			</div>
 			<input type="hidden" id="id" th:field="*{id}" />
 			<button type="submit" class="btn btn-primary">Salvar</button>

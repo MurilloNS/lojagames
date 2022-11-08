@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.murillo.lojagames.entities.Administrador;
 import com.murillo.lojagames.exceptions.CpfExistenteException;
+import com.murillo.lojagames.exceptions.EmailExistenteException;
 import com.murillo.lojagames.messages.Message;
 import com.murillo.lojagames.repositories.AdministradorRepository;
 import com.murillo.lojagames.services.AdministradorService;
@@ -29,9 +30,12 @@ public class AdministradorServiceImpl implements AdministradorService {
 		try {
 			administrador.setCpf(administrador.getCpf().replace(".", "").replace("-", ""));
 			administrador.setSenha(new BCryptPasswordEncoder().encode(administrador.getSenha()));
-			
 			if(findByCPF(administrador) != null) {
 				throw new CpfExistenteException("Este CPF já está cadastrado!");
+			}
+			
+			if(findByEmail(administrador) != null) {
+				throw new EmailExistenteException("Este email já está cadastrado!");
 			}
 			
 			session.setAttribute("message", new Message("Administrador cadastrado com sucesso!", "success"));
@@ -40,7 +44,11 @@ public class AdministradorServiceImpl implements AdministradorService {
 			System.out.println("ERROR " + e.getMessage());
 			e.printStackTrace();
 			session.setAttribute("message", new Message(e.getContent() , "danger"));
-		}
+		} catch (EmailExistenteException e) {
+			System.out.println("ERROR " + e.getMessage());
+			e.printStackTrace();
+			session.setAttribute("message", new Message(e.getContent() , "danger"));
+		} 
 		
 		return administrador;
 	}
@@ -60,6 +68,16 @@ public class AdministradorServiceImpl implements AdministradorService {
 		if(admCpf != null) {
 			return admCpf;
 		}
+		
+		return null;
+	}
+	
+	private Administrador findByEmail(Administrador administrador) {
+		Administrador admEmail = administradorRepository.findByEmail(administrador.getEmail());
+		if(admEmail != null) {
+			return admEmail;
+		}
+		
 		return null;
 	}
 }
