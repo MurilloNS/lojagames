@@ -41,12 +41,8 @@ public class AdministradorServiceImpl implements AdministradorService {
 			session.setAttribute("message", new Message("Administrador cadastrado com sucesso!", "success"));
 			return administradorRepository.saveAndFlush(administrador);
 		} catch (CpfExistenteException e) {
-			System.out.println("ERROR " + e.getMessage());
-			e.printStackTrace();
 			session.setAttribute("message", new Message(e.getContent() , "danger"));
 		} catch (EmailExistenteException e) {
-			System.out.println("ERROR " + e.getMessage());
-			e.printStackTrace();
 			session.setAttribute("message", new Message(e.getContent() , "danger"));
 		} 
 		
