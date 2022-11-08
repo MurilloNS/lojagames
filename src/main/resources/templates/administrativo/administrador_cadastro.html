@@ -8,6 +8,14 @@
 <body>
 	<section class="corpo" layout:fragment="corpo">
 		<h1>Administradores</h1>
+		<!-- Messages -->
+		<div th:if="${session.message}">
+			<div th:classappend="${'alert-'+session.message.type}" class="alert alert-success" role="alert">
+				<span th:text="${session.message.content}"></span>	
+			</div>
+			<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+		</div>
+		
 		<form action="/administrador/salvar" th:object="${administrador}" method="POST">
 			<div class="form-group">
 				<label for="name">Nome Completo: </label>

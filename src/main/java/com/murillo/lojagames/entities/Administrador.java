@@ -4,7 +4,14 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_administradores")
@@ -14,17 +21,9 @@ public class Administrador implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@Column(nullable = false)
 	private String nome;
-
-	@Column(length = 11, nullable = false, unique = true)
 	private String cpf;
-
-	@Column(length = 45, nullable = false, unique = false)
 	private String email;
-
-	@Column(nullable = false)
 	private String senha;
 
 	@ManyToMany

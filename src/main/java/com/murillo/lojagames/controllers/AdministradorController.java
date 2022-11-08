@@ -1,5 +1,7 @@
 package com.murillo.lojagames.controllers;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,8 +38,8 @@ public class AdministradorController {
 	}
 
 	@PostMapping("/administrador/salvar")
-	public ModelAndView salvar(Administrador administrador) {
-		administradorService.salvarAdministrador(administrador);
+	public ModelAndView salvar(Administrador administrador, HttpSession session) {
+		administradorService.salvarAdministrador(administrador, session);
 		return cadastrar(new Administrador(), new Papel());
 	}
 
