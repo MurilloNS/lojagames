@@ -31,11 +31,11 @@ public class ClienteServiceImpl implements ClienteService {
 		try {
 			cliente.setCpf(cliente.getCpf().replace(".", "").replace("-", ""));
 			cliente.setSenha(new BCryptPasswordEncoder().encode(cliente.getSenha()));
-			if (findClientByCpf(cliente) != null) {
+			if (findClientByCpf(cliente) != null && cliente.getId() == null) {
 				throw new CpfExistenteException("Este CPF já está cadastrado!");
 			}
 			
-			if(findClientByEmail(cliente) != null) {
+			if(findClientByEmail(cliente) != null && cliente.getId() == null) {
 				throw new EmailExistenteException("Este email já está cadastrado");
 			}
 			

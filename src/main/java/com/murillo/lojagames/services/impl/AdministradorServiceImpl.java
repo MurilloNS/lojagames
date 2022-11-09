@@ -30,11 +30,11 @@ public class AdministradorServiceImpl implements AdministradorService {
 		try {
 			administrador.setCpf(administrador.getCpf().replace(".", "").replace("-", ""));
 			administrador.setSenha(new BCryptPasswordEncoder().encode(administrador.getSenha()));
-			if(findByCPF(administrador) != null) {
+			if(findByCPF(administrador) != null && administrador.getId() == null) {
 				throw new CpfExistenteException("Este CPF já está cadastrado!");
 			}
 			
-			if(findByEmail(administrador) != null) {
+			if(findByEmail(administrador) != null && administrador.getId() == null) {
 				throw new EmailExistenteException("Este email já está cadastrado!");
 			}
 			

@@ -24,9 +24,34 @@
 					<td th:text="${papel.nome}"></td>
 					<td>
 						<a th:href="@{/papel/editar/{id}(id=${papel.id})}"><button type="button"
-								class="btn btn-warning"><i class="fa-solid fa-pencil"></i></button></a>
-						<a th:href="@{/papel/excluir/{id}(id=${papel.id})}"><button type="button"
-								class="btn btn-danger"><i class="fa-regular fa-trash-can"></i></button></a>
+								class="btn btn-warning"><i class="fa-solid fa-pencil"></i></button>
+						</a>
+						<a th:attr="data-target='#modal-warning'+${papel.id}" data-toggle="modal"
+							data-target="#modal-warning"><button type="button" class="btn btn-danger"><i
+									class="fa-regular fa-trash-can"></i></button>
+						</a>
+						<div th:id="modal-warning+${papel.id}" class="modal modal-warning fade in">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Remover Papel</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+											<span aria-hidden="true">x</span>
+										</button>
+
+									</div>
+									<div class="modal-body">
+										<h3>Deseja realmente remover esse papel?</h3>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Fechar</button>
+										<a type="button" class="btn btn-primary"
+											th:href="@{/papel/excluir/{id}(id=${papel.id})}">Sim</a>
+									</div>
+								</div>
+							</div>
+						</div>
 					</td>
 				</tr>
 			</tbody>

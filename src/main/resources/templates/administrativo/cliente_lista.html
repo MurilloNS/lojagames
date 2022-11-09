@@ -30,9 +30,34 @@
 					<td th:text="${cliente.produtos}"></td>
 					<td>
 						<a th:href="@{/cliente/editar/{id}(id=${cliente.id})}"><button type="button"
-								class="btn btn-warning"><i class="fa-solid fa-pencil"></i></button></a>
-						<a th:href="@{/cliente/excluir/{id}(id=${cliente.id})}"><button type="button"
-								class="btn btn-danger"><i class="fa-regular fa-trash-can"></i></button></a>
+								class="btn btn-warning"><i class="fa-solid fa-pencil"></i></button>
+						</a>
+						<a th:attr="data-target='#modal-warning'+${cliente.id}" data-toggle="modal"
+							data-target="#modal-warning"><button type="button" class="btn btn-danger"><i
+									class="fa-regular fa-trash-can"></i></button>
+						</a>
+						<div th:id="modal-warning+${cliente.id}" class="modal modal-warning fade in">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Remover Cliente</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+											<span aria-hidden="true">x</span>
+										</button>
+
+									</div>
+									<div class="modal-body">
+										<h3>Deseja realmente remover esse cliente?</h3>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Fechar</button>
+										<a type="button" class="btn btn-primary"
+											th:href="@{/cliente/excluir/{id}(id=${cliente.id})}">Sim</a>
+									</div>
+								</div>
+							</div>
+						</div>
 					</td>
 				</tr>
 			</tbody>
